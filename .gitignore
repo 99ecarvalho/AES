@@ -1,2 +1,20 @@
+# Build artifacts
 aes
+*.o
+
+# Python virtual environment and analysis results
+venv/
+__pycache__/
+*.pyc
+*.pyo
+benchmark_results.json
+benchmark_plots/
+
+# IDE files
 .vscode-ctags
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
