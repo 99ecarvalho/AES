@@ -77,7 +77,7 @@ analysis: $(TARGET)
 		echo "Virtual environment not found. Run 'make deps' first."; \
 		exit 1; \
 	fi
-	@source venv/bin/activate && python3 benchmark_analysis.py
+	@bash -c "source venv/bin/activate && python3 benchmark_analysis.py"
 
 # Quick test with smaller dataset
 quick-analysis: $(TARGET)
@@ -86,7 +86,7 @@ quick-analysis: $(TARGET)
 		echo "Virtual environment not found. Run 'make deps' first."; \
 		exit 1; \
 	fi
-	@source venv/bin/activate && python3 quick_test.py
+	@bash -c "source venv/bin/activate && python3 quick_test.py"
 
 # Install Python dependencies
 deps:

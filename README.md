@@ -146,4 +146,3 @@ This project is released under the MIT License. See LICENSE file for details.
 ## Author
 
 Created by Eduardo Correia <ecorreia@apliant.com.br>
-Enhanced with comprehensive analysis by GitHub Copilot Assistant.
