@@ -29,7 +29,7 @@ except ImportError as e:
 class AESBenchmarkRunner:
     def __init__(self, executable_path="./aes"):
         self.executable_path = executable_path
-        self.modes = ["soft", "aesni", "evp", "evp-soft", "afalg"]
+        self.modes = ["soft", "aesni", "aesni-native", "aesni-atom", "evp", "evp-soft", "afalg"]
         self.results = []
         
     def run_single_benchmark(self, mode, size, iterations=5):

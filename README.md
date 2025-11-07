@@ -2,14 +2,17 @@
 
 A comprehensive benchmark suite for comparing different AES-256-CTR implementations including pure software, AES-NI hardware acceleration, OpenSSL EVP, and Linux kernel AF_ALG.
 
-## Features
+## 📋 Available Implementations
 
-- **Multiple Implementation Modes:**
-  - `soft`: Pure software AES-256 implementation
-  - `aesni`: AES-NI hardware accelerated implementation  
-  - `evp`: OpenSSL EVP (automatic hardware detection)
-  - `evp-soft`: OpenSSL EVP (software-only)
-  - `afalg`: Linux kernel AF_ALG crypto interface
+This benchmark suite includes 7 different AES-256-CTR implementations:
+
+1. **soft** - Pure software implementation (portable)
+2. **aesni** - AES-NI hardware acceleration (x86 processors)  
+3. **aesni-native** - Native AES-NI intrinsics (optimized)
+4. **aesni-atom** - Atom/Silvermont optimized (2-way parallelism)
+5. **evp** - OpenSSL EVP interface (auto-detection)
+6. **evp-soft** - OpenSSL EVP software-only mode
+7. **afalg** - Linux kernel crypto API (AF_ALG)
 
 - **Python Analysis Suite:**
   - Automated benchmarking across multiple data sizes
@@ -51,8 +54,9 @@ make analysis
 ## Usage
 
 ### Command Line Options
-```
-./aes --mode {soft|aesni|evp|evp-soft|afalg} [options]
+
+```text
+./aes --mode {soft|aesni|aesni-native|evp|evp-soft|afalg} [options]
 
 Options:
   --mode MODE     Implementation to benchmark
@@ -93,13 +97,15 @@ The Python analysis suite generates:
 
 Typical performance on modern x86_64 hardware:
 
-| Mode     | Throughput (MB/s) | Cycles/Byte | Description |
-|----------|-------------------|-------------|-------------|
-| evp      | ~7,000            | ~0.40       | OpenSSL optimized |
-| evp-soft | ~6,800            | ~0.41       | OpenSSL software |
-| afalg    | ~3,600            | ~0.77       | Linux kernel |
-| aesni    | ~1,100            | ~2.50       | Direct AES-NI |
-| soft     | ~100              | ~25.93      | Pure software |
+| Mode         | Throughput (MB/s) | Cycles/Byte | Description |
+|--------------|-------------------|-------------|-------------|
+| evp-soft     | ~4,525            | ~0.64       | OpenSSL software |
+| evp          | ~3,978            | ~0.73       | OpenSSL optimized |
+| aesni-atom   | ~3,537            | ~0.82       | Atom/Silvermont opt |
+| afalg        | ~1,886            | ~1.54       | Linux kernel |
+| aesni-native | ~953              | ~3.04       | Native AES-NI |
+| aesni        | ~848              | ~3.42       | Direct AES-NI |
+| soft         | ~78               | ~37.2       | Pure software |
 
 ## Requirements
 

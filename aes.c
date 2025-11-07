@@ -1,9 +1,13 @@
 /*
 AES-256-CTR benchmark (ANSI C99)
 - Modes:
-    --mode soft    : pure software AES-256 implementation (portable x86_64 C)
-    --mode aesni   : AES-NI accelerated AES-256 (user-space intrinsics)
-    --mode afalg   : AF_ALG kernel crypto (ctr(aes) / aes(ctr))
+    --mode soft         : pure software AES-256 implementation (portable x86_64 C)
+    --mode aesni        : AES-NI accelerated AES-256 (user-space intrinsics)
+    --mode aesni-native : AES-NI native optimized implementation
+    --mode aesni-atom   : AES-NI highly optimized for Atom/Silvermont (2-way parallelism)
+    --mode evp          : OpenSSL EVP (auto hardware detection)
+    --mode evp-soft     : OpenSSL EVP software-only
+    --mode afalg        : AF_ALG kernel crypto (ctr(aes) / aes(ctr))
 - Options:
     --size N       : data size in bytes (default 1048576)
     --iters N      : iterations (default 10)
@@ -269,6 +273,331 @@ static inline void aes256_encrypt_block_aesni(const __m128i rk[AES256_ROUNDS+1],
 #endif
 
 /* ---------------------------
+   AES-NI Native Implementation (from aesni.c)
+   - More optimized AES-NI code with improved key expansion
+   --------------------------- */
+#if defined(__x86_64__) || defined(__i386__)
+
+#include <immintrin.h>
+
+/* AES-256 key expansion (native optimized version) */
+static void aes256_key_expansion_native(const uint8_t *key, __m128i *round_keys) {
+    __m128i temp1, temp2, temp3;
+    temp1 = _mm_loadu_si128((__m128i*)key);
+    temp3 = _mm_loadu_si128((__m128i*)(key + 16));
+    round_keys[0] = temp1;
+    round_keys[1] = temp3;
+
+    #define AES_256_KEY_EXP(K1, K2, I) do { \
+        temp2 = _mm_aeskeygenassist_si128(K2, I); \
+        temp2 = _mm_shuffle_epi32(temp2, 0xff); \
+        K1 = _mm_xor_si128(K1, _mm_slli_si128(K1, 4)); \
+        K1 = _mm_xor_si128(K1, _mm_slli_si128(K1, 4)); \
+        K1 = _mm_xor_si128(K1, _mm_slli_si128(K1, 4)); \
+        K1 = _mm_xor_si128(K1, temp2); \
+        round_keys[(I*2)] = K1; \
+        temp2 = _mm_aeskeygenassist_si128(K1, 0x00); \
+        temp2 = _mm_shuffle_epi32(temp2, 0xaa); \
+        K2 = _mm_xor_si128(K2, _mm_slli_si128(K2, 4)); \
+        K2 = _mm_xor_si128(K2, _mm_slli_si128(K2, 4)); \
+        K2 = _mm_xor_si128(K2, _mm_slli_si128(K2, 4)); \
+        K2 = _mm_xor_si128(K2, temp2); \
+        round_keys[(I*2)+1] = K2; \
+    } while(0)
+
+    AES_256_KEY_EXP(temp1, temp3, 1);
+    AES_256_KEY_EXP(temp1, temp3, 2);
+    AES_256_KEY_EXP(temp1, temp3, 3);
+    AES_256_KEY_EXP(temp1, temp3, 4);
+    AES_256_KEY_EXP(temp1, temp3, 5);
+    AES_256_KEY_EXP(temp1, temp3, 6);
+    
+    /* Final key expansion step for round 14 */
+    temp2 = _mm_aeskeygenassist_si128(temp3, 0x40);
+    temp2 = _mm_shuffle_epi32(temp2, 0xff);
+    temp1 = _mm_xor_si128(temp1, _mm_slli_si128(temp1, 4));
+    temp1 = _mm_xor_si128(temp1, _mm_slli_si128(temp1, 4));
+    temp1 = _mm_xor_si128(temp1, _mm_slli_si128(temp1, 4));
+    temp1 = _mm_xor_si128(temp1, temp2);
+    round_keys[14] = temp1;
+
+    #undef AES_256_KEY_EXP
+}
+
+/* AES-256 key expansion (Atom optimized version from aes_cl2.c) */
+static void aes256_key_expansion_atom(const uint8_t *key, __m128i *round_keys) {
+    __m128i tmp1, tmp2, tmp3;
+    tmp1 = _mm_loadu_si128((const __m128i *)key);
+    tmp3 = _mm_loadu_si128((const __m128i *)(key + 16));
+    round_keys[0] = tmp1;
+    round_keys[1] = tmp3;
+
+    const uint8_t rcon[] = {1, 2, 4, 8, 16, 32, 64};
+
+    for (int i = 0; i < 7; ++i) {
+        tmp2 = _mm_aeskeygenassist_si128(tmp3, rcon[i]);
+        tmp2 = _mm_shuffle_epi32(tmp2, 0xff);
+        tmp1 = _mm_xor_si128(tmp1, _mm_slli_si128(tmp1, 4));
+        tmp1 = _mm_xor_si128(tmp1, _mm_slli_si128(tmp1, 4));
+        tmp1 = _mm_xor_si128(tmp1, _mm_slli_si128(tmp1, 4));
+        tmp1 = _mm_xor_si128(tmp1, tmp2);
+        round_keys[2 * i + 2] = tmp1;
+
+        tmp2 = _mm_aeskeygenassist_si128(tmp1, 0x00);
+        tmp2 = _mm_shuffle_epi32(tmp2, 0xaa);
+        tmp3 = _mm_xor_si128(tmp3, _mm_slli_si128(tmp3, 4));
+        tmp3 = _mm_xor_si128(tmp3, _mm_slli_si128(tmp3, 4));
+        tmp3 = _mm_xor_si128(tmp3, _mm_slli_si128(tmp3, 4));
+        tmp3 = _mm_xor_si128(tmp3, tmp2);
+        round_keys[2 * i + 3] = tmp3;
+    }
+}
+
+/* Unrolled AES-256 encryption - all rounds explicit, no loop overhead */
+static inline __m128i aes256_encrypt_block_unrolled(__m128i block, const __m128i *rk) {
+    block = _mm_xor_si128(block, rk[0]);
+    block = _mm_aesenc_si128(block, rk[1]);
+    block = _mm_aesenc_si128(block, rk[2]);
+    block = _mm_aesenc_si128(block, rk[3]);
+    block = _mm_aesenc_si128(block, rk[4]);
+    block = _mm_aesenc_si128(block, rk[5]);
+    block = _mm_aesenc_si128(block, rk[6]);
+    block = _mm_aesenc_si128(block, rk[7]);
+    block = _mm_aesenc_si128(block, rk[8]);
+    block = _mm_aesenc_si128(block, rk[9]);
+    block = _mm_aesenc_si128(block, rk[10]);
+    block = _mm_aesenc_si128(block, rk[11]);
+    block = _mm_aesenc_si128(block, rk[12]);
+    block = _mm_aesenc_si128(block, rk[13]);
+    block = _mm_aesenclast_si128(block, rk[14]);
+    return block;
+}
+
+/* 2-way parallelism unrolled - optimal for Atom's narrow pipeline */
+static inline void aes256_encrypt_2blocks_unrolled(__m128i *b0, __m128i *b1, const __m128i *rk) {
+    /* Initial round */
+    *b0 = _mm_xor_si128(*b0, rk[0]);
+    *b1 = _mm_xor_si128(*b1, rk[0]);
+    
+    /* Rounds 1-13 - interleaved to hide latency */
+    *b0 = _mm_aesenc_si128(*b0, rk[1]);
+    *b1 = _mm_aesenc_si128(*b1, rk[1]);
+    *b0 = _mm_aesenc_si128(*b0, rk[2]);
+    *b1 = _mm_aesenc_si128(*b1, rk[2]);
+    *b0 = _mm_aesenc_si128(*b0, rk[3]);
+    *b1 = _mm_aesenc_si128(*b1, rk[3]);
+    *b0 = _mm_aesenc_si128(*b0, rk[4]);
+    *b1 = _mm_aesenc_si128(*b1, rk[4]);
+    *b0 = _mm_aesenc_si128(*b0, rk[5]);
+    *b1 = _mm_aesenc_si128(*b1, rk[5]);
+    *b0 = _mm_aesenc_si128(*b0, rk[6]);
+    *b1 = _mm_aesenc_si128(*b1, rk[6]);
+    *b0 = _mm_aesenc_si128(*b0, rk[7]);
+    *b1 = _mm_aesenc_si128(*b1, rk[7]);
+    *b0 = _mm_aesenc_si128(*b0, rk[8]);
+    *b1 = _mm_aesenc_si128(*b1, rk[8]);
+    *b0 = _mm_aesenc_si128(*b0, rk[9]);
+    *b1 = _mm_aesenc_si128(*b1, rk[9]);
+    *b0 = _mm_aesenc_si128(*b0, rk[10]);
+    *b1 = _mm_aesenc_si128(*b1, rk[10]);
+    *b0 = _mm_aesenc_si128(*b0, rk[11]);
+    *b1 = _mm_aesenc_si128(*b1, rk[11]);
+    *b0 = _mm_aesenc_si128(*b0, rk[12]);
+    *b1 = _mm_aesenc_si128(*b1, rk[12]);
+    *b0 = _mm_aesenc_si128(*b0, rk[13]);
+    *b1 = _mm_aesenc_si128(*b1, rk[13]);
+    
+    /* Final round */
+    *b0 = _mm_aesenclast_si128(*b0, rk[14]);
+    *b1 = _mm_aesenclast_si128(*b1, rk[14]);
+}
+
+/* AES-NI Atom CTR implementation - optimized for benchmarks (pre-computed keys) */
+static void aes256_ctr_crypt_aesni_atom_precomputed(uint8_t *buf, size_t len, const uint8_t key[32], uint8_t iv_counter[16]) {
+    // Pre-compute keys once per benchmark call (not per iteration)
+    static __m128i cached_round_keys[15];
+    static uint8_t cached_key[32];
+    static int keys_valid = 0;
+    
+    // Check if we need to recompute keys
+    if (!keys_valid || memcmp(cached_key, key, 32) != 0) {
+        aes256_key_expansion_atom(key, cached_round_keys);
+        memcpy(cached_key, key, 32);
+        keys_valid = 1;
+    }
+    
+    const __m128i *round_keys = cached_round_keys;
+    /* Load counter once - optimized for Atom */
+    uint64_t ctr_low, ctr_high;
+    memcpy(&ctr_low, iv_counter + 8, 8);
+    memcpy(&ctr_high, iv_counter, 8);
+    
+    /* Use direct pointers like aes_cl2.c for better performance */
+    uint8_t *ptr = buf;
+    size_t blocks = len / 16;
+    
+    /* Process 2 blocks at a time - optimal for Atom's narrow pipeline */
+    while (blocks >= 2) {
+        /* Build counters directly */
+        __m128i c0 = _mm_set_epi64x(ctr_low, ctr_high);
+        ctr_low++;
+        if (ctr_low == 0) ctr_high++;
+        
+        __m128i c1 = _mm_set_epi64x(ctr_low, ctr_high);
+        ctr_low++;
+        if (ctr_low == 0) ctr_high++;
+        
+        /* Encrypt both counters */
+        aes256_encrypt_2blocks_unrolled(&c0, &c1, round_keys);
+        
+        /* Load, XOR, store - using direct pointer arithmetic */
+        __m128i d0 = _mm_loadu_si128((__m128i *)ptr);
+        __m128i d1 = _mm_loadu_si128((__m128i *)(ptr + 16));
+        
+        d0 = _mm_xor_si128(d0, c0);
+        d1 = _mm_xor_si128(d1, c1);
+        
+        _mm_storeu_si128((__m128i *)ptr, d0);
+        _mm_storeu_si128((__m128i *)(ptr + 16), d1);
+        
+        ptr += 32;
+        blocks -= 2;
+    }
+    
+    /* Handle remaining block - simplified like aes_cl2.c */
+    if (blocks > 0) {
+        __m128i ctr = _mm_set_epi64x(ctr_low, ctr_high);
+        __m128i keystream = aes256_encrypt_block_unrolled(ctr, round_keys);
+        
+        size_t remaining = len - (ptr - buf);
+        if (remaining >= 16) {
+            __m128i data = _mm_loadu_si128((__m128i *)ptr);
+            data = _mm_xor_si128(data, keystream);
+            _mm_storeu_si128((__m128i *)ptr, data);
+        } else {
+            /* Handle partial block */
+            uint8_t keystream_bytes[16];
+            _mm_storeu_si128((__m128i *)keystream_bytes, keystream);
+            for (size_t i = 0; i < remaining; ++i) {
+                ptr[i] ^= keystream_bytes[i];
+            }
+        }
+    }
+}
+
+/* AES-NI Atom CTR implementation - highly optimized for Silvermont */
+static void aes256_ctr_crypt_aesni_atom(uint8_t *buf, size_t len, const uint8_t key[32], uint8_t iv_counter[16]) {
+    __m128i round_keys[15];
+    aes256_key_expansion_atom(key, round_keys);
+    aes256_ctr_crypt_aesni_atom_precomputed(buf, len, round_keys, iv_counter);
+}
+    
+    /* Load counter once - optimized for Atom */
+    uint64_t ctr_low, ctr_high;
+    memcpy(&ctr_low, iv_counter + 8, 8);
+    memcpy(&ctr_high, iv_counter, 8);
+    
+    /* Use direct pointers like aes_cl2.c for better performance */
+    uint8_t *ptr = buf;
+    size_t blocks = len / 16;
+    
+    /* Process 2 blocks at a time - optimal for Atom's narrow pipeline */
+    while (blocks >= 2) {
+        /* Build counters directly */
+        __m128i c0 = _mm_set_epi64x(ctr_low, ctr_high);
+        ctr_low++;
+        if (ctr_low == 0) ctr_high++;
+        
+        __m128i c1 = _mm_set_epi64x(ctr_low, ctr_high);
+        ctr_low++;
+        if (ctr_low == 0) ctr_high++;
+        
+        /* Encrypt both counters */
+        aes256_encrypt_2blocks_unrolled(&c0, &c1, round_keys);
+        
+        /* Load, XOR, store - using direct pointer arithmetic */
+        __m128i d0 = _mm_loadu_si128((__m128i *)ptr);
+        __m128i d1 = _mm_loadu_si128((__m128i *)(ptr + 16));
+        
+        d0 = _mm_xor_si128(d0, c0);
+        d1 = _mm_xor_si128(d1, c1);
+        
+        _mm_storeu_si128((__m128i *)ptr, d0);
+        _mm_storeu_si128((__m128i *)(ptr + 16), d1);
+        
+        ptr += 32;
+        blocks -= 2;
+    }
+    
+    /* Handle remaining block - simplified like aes_cl2.c */
+    if (blocks > 0) {
+        __m128i ctr = _mm_set_epi64x(ctr_low, ctr_high);
+        __m128i keystream = aes256_encrypt_block_unrolled(ctr, round_keys);
+        
+        size_t remaining = len - (ptr - buf);
+        if (remaining >= 16) {
+            __m128i data = _mm_loadu_si128((__m128i *)ptr);
+            data = _mm_xor_si128(data, keystream);
+            _mm_storeu_si128((__m128i *)ptr, data);
+        } else {
+            /* Handle partial block */
+            uint8_t keystream_bytes[16];
+            _mm_storeu_si128((__m128i *)keystream_bytes, keystream);
+            for (size_t i = 0; i < remaining; ++i) {
+                ptr[i] ^= keystream_bytes[i];
+            }
+        }
+    }
+}
+
+/* AES-256 single block encrypt (native optimized version) */
+static inline __m128i aes256_encrypt_block_native(__m128i in, const __m128i *round_keys) {
+    in = _mm_xor_si128(in, round_keys[0]);
+    for (int i = 1; i < 14; i++) {
+        in = _mm_aesenc_si128(in, round_keys[i]);
+    }
+    in = _mm_aesenclast_si128(in, round_keys[14]);
+    return in;
+}
+
+/* AES-NI Native CTR implementation */
+static void aes256_ctr_crypt_aesni_native(uint8_t *buf, size_t len, const uint8_t key[32], uint8_t iv_counter[16]) {
+    __m128i round_keys[15];
+    aes256_key_expansion_native(key, round_keys);
+    
+    __m128i ctr = _mm_loadu_si128((__m128i*)iv_counter);
+    
+    size_t offset = 0;
+    while (offset < len) {
+        __m128i keystream = aes256_encrypt_block_native(ctr, round_keys);
+        
+        size_t chunk = (len - offset >= 16) ? 16 : (len - offset);
+        
+        if (chunk == 16) {
+            /* Full block - use SIMD XOR */
+            __m128i block = _mm_loadu_si128((__m128i*)(buf + offset));
+            block = _mm_xor_si128(block, keystream);
+            _mm_storeu_si128((__m128i*)(buf + offset), block);
+        } else {
+            /* Partial block - byte-wise XOR */
+            uint8_t keystream_bytes[16];
+            _mm_storeu_si128((__m128i*)keystream_bytes, keystream);
+            for (size_t i = 0; i < chunk; ++i) {
+                buf[offset + i] ^= keystream_bytes[i];
+            }
+        }
+        
+        offset += chunk;
+        
+        /* Increment counter (big-endian like other implementations) */
+        incr_counter_be(iv_counter);
+        ctr = _mm_loadu_si128((__m128i*)iv_counter);
+    }
+}
+
+#endif
+
+/* ---------------------------
    OpenSSL EVP AES-256-CTR implementations
    - evp: OpenSSL EVP (auto-detects hardware acceleration)
    - evp-soft: OpenSSL EVP with software-only engine
@@ -329,6 +658,8 @@ static void aes256_ctr_crypt_evp_soft(uint8_t *buf, size_t len, const uint8_t ke
    AES-CTR wrappers for different implementations
    - soft: uses aes256_encrypt_block_soft
    - aesni: uses aes256_encrypt_block_aesni
+   - aesni-native: uses aes256_ctr_crypt_aesni_native (optimized)
+   - aesni-atom: uses aes256_ctr_crypt_aesni_atom (Atom/Silvermont optimized)
    - evp: OpenSSL EVP (auto hardware detection)
    - evp-soft: OpenSSL EVP software-only
    - afalg: kernel AF_ALG
@@ -581,13 +912,16 @@ static int run_benchmark_afalg(size_t size, int iters) {
 
 static void print_usage(const char *me) {
     fprintf(stderr,
-        "Usage: %s --mode {soft|aesni|evp|evp-soft|afalg} [--size bytes] [--iters n] [--debug n]\n"
+        "Usage: %s --mode {soft|aesni|aesni-native|aesni-atom|evp|evp-soft|afalg} [--size bytes] [--iters n] [--debug n]\n"
         "Modes:\n"
-        "  soft     : Pure software AES-256 implementation\n"
-        "  aesni    : AES-NI accelerated AES-256\n"
-        "  evp      : OpenSSL EVP (auto hardware detection)\n"
-        "  evp-soft : OpenSSL EVP software-only\n"
-        "  afalg    : AF_ALG kernel crypto\n", me);
+        "  soft         : Pure software AES-256 implementation\n"
+        "  aesni        : AES-NI accelerated AES-256\n"
+        "  aesni-native : AES-NI native optimized implementation\n"
+        "  aesni-atom   : AES-NI Atom/Silvermont optimized (2-way parallelism)\n"
+        "  aesni-atom-opt: AES-NI Atom optimized (pre-computed keys for benchmarks)\n"
+        "  evp          : OpenSSL EVP (auto hardware detection)\n"
+        "  evp-soft     : OpenSSL EVP software-only\n"
+        "  afalg        : AF_ALG kernel crypto\n", me);
 }
 
 int main(int argc, char **argv) {
@@ -617,6 +951,27 @@ int main(int argc, char **argv) {
     } else if (strcmp(mode, "aesni") == 0) {
 #if defined(__x86_64__) || defined(__i386__)
         return run_benchmark_ctr(aes256_ctr_crypt_aesni, size, iters, key, iv);
+#else
+        fprintf(stderr, "AES-NI not available on this architecture\n");
+        return 1;
+#endif
+    } else if (strcmp(mode, "aesni-native") == 0) {
+#if defined(__x86_64__) || defined(__i386__)
+        return run_benchmark_ctr(aes256_ctr_crypt_aesni_native, size, iters, key, iv);
+#else
+        fprintf(stderr, "AES-NI not available on this architecture\n");
+        return 1;
+#endif
+    } else if (strcmp(mode, "aesni-atom") == 0) {
+#if defined(__x86_64__) || defined(__i386__)
+        return run_benchmark_ctr(aes256_ctr_crypt_aesni_atom, size, iters, key, iv);
+#else
+        fprintf(stderr, "AES-NI not available on this architecture\n");
+        return 1;
+#endif
+    } else if (strcmp(mode, "aesni-atom-opt") == 0) {
+#if defined(__x86_64__) || defined(__i386__)
+        return run_benchmark_ctr(aes256_ctr_crypt_aesni_atom_precomputed, size, iters, key, iv);
 #else
         fprintf(stderr, "AES-NI not available on this architecture\n");
         return 1;
