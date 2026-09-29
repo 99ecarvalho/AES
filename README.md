@@ -1,154 +1,69 @@
-# AES-256-CTR Performance Benchmark
+# AES-256-CTR Benchmarks
 
-A comprehensive benchmark suite for comparing different AES-256-CTR implementations including pure software, AES-NI hardware acceleration, OpenSSL EVP, and Linux kernel AF_ALG.
+This repository explores the performance of AES-256 in counter (CTR) mode on
+x86-64 Linux, with particular attention to Intel Atom E3845 (Silvermont). It
+contains a multi-backend C benchmark, an Atom-focused implementation, assembly
+experiments, and scripts for collecting and plotting measurements.
 
-## 📋 Available Implementations
+## What was built
 
-This benchmark suite includes 7 different AES-256-CTR implementations:
+- [`aes.c`](aes.c) benchmarks seven paths: portable C (`soft`), direct AES-NI
+  (`aesni`), two optimized AES-NI variants (`aesni-native`, `aesni-atom`),
+  OpenSSL EVP (`evp`, `evp-soft`), and the Linux AF_ALG crypto interface
+  (`afalg`). They use the same command-line interface for comparisons across
+  input sizes and iteration counts.
+- [`aesfinal.c`](aesfinal.c) is a separate Atom-oriented AES-NI/CTR benchmark
+  built by [`Makefile_aesfinal`](Makefile_aesfinal). It experiments with
+  precomputed round keys, unrolled rounds, and two-block processing.
+- [`assembly/`](assembly/) contains inline and standalone assembly experiments
+  and a separate build file. See the [assembly notes](assembly/README_ASSEMBLY.md)
+  for their current limitations.
+- [`benchmark_analysis.py`](benchmark_analysis.py) and
+  [`quick_test.py`](quick_test.py) run the main benchmark at multiple sizes and
+  produce JSON results and PNG/PDF plots. The tracked
+  [`quick_test_results.json`](quick_test_results.json) and
+  [`quick_test_plots/`](quick_test_plots/) are example measurements and charts.
 
-1. **soft** - Pure software implementation (portable)
-2. **aesni** - AES-NI hardware acceleration (x86 processors)  
-3. **aesni-native** - Native AES-NI intrinsics (optimized)
-4. **aesni-atom** - Atom/Silvermont optimized (2-way parallelism)
-5. **evp** - OpenSSL EVP interface (auto-detection)
-6. **evp-soft** - OpenSSL EVP software-only mode
-7. **afalg** - Linux kernel crypto API (AF_ALG)
+## Build and run
 
-- **Python Analysis Suite:**
-  - Automated benchmarking across multiple data sizes
-  - Statistical analysis and visualization
-  - Box plots, performance comparisons, heatmaps
-  - Export to PDF and PNG formats
+Requirements: x86-64 Linux, a C99-capable GCC, Make, and OpenSSL development
+headers and libraries. AES-NI modes require a CPU with AES-NI; AF_ALG requires
+Linux kernel crypto support. The separate Atom-oriented build uses static
+linking and requires the corresponding static toolchain libraries.
 
-## Quick Start
-
-### 1. Build the benchmark
-```bash
+```sh
 make
-```
-
-### 2. Run basic tests
-```bash
-# Quick performance comparison
+./aes --mode soft --size 1048576 --iters 10
+./aes --mode evp --size 1048576 --iters 10
 make benchmark
 
-# Test all modes
-make test
-
-# Run single mode
-./aes --mode evp --size 1048576 --iters 10
+make -f Makefile_aesfinal
+./aesfinal --size 1048576 --iters 10
 ```
 
-### 3. Install Python dependencies and run analysis
-```bash
-# Install Python virtual environment and dependencies
+Run `./aes --help` or `./aesfinal --help` for their options. `make test` runs
+all seven main modes, including the hardware- and kernel-dependent ones.
+
+## Analysis
+
+Python 3 with NumPy, pandas, Matplotlib, and seaborn is needed for plots. The
+repository's `make deps` target installs these into its `venv/` environment.
+After building `aes`, run:
+
+```sh
 make deps
-
-# Quick analysis (3 sizes, faster)
 make quick-analysis
-
-# Comprehensive analysis (8 sizes, more thorough)
+# or, for a larger set of measurements:
 make analysis
 ```
 
-## Usage
+`make quick-analysis` writes `quick_test_results.json` and `quick_test_plots/`;
+`make analysis` writes `benchmark_results.json` and `benchmark_plots/`.
+Generated measurements depend on the CPU, compiler, kernel, OpenSSL build, and
+run conditions; do not treat the checked-in charts or throughput figures as
+portable performance guarantees. These programs are benchmark experiments,
+not a validated cryptographic library or a substitute for correctness and
+security testing before production use.
 
-### Command Line Options
-
-```text
-./aes --mode {soft|aesni|aesni-native|evp|evp-soft|afalg} [options]
-
-Options:
-  --mode MODE     Implementation to benchmark
-  --size BYTES    Data size in bytes (default: 1048576)
-  --iters N       Number of iterations (default: 10)
-  --debug N       Debug verbosity level (default: 0)
-  --help          Show help message
-```
-
-### Available Make Targets
-```
-make all            # Build the benchmark (default)
-make test           # Run tests with different modes  
-make benchmark      # Quick performance comparison
-make deps           # Install Python dependencies
-make quick-analysis # Quick analysis (3 sizes)
-make analysis       # Comprehensive analysis (8 sizes)
-make clean          # Remove build artifacts
-make help           # Show all available targets
-```
-
-## Python Analysis
-
-The Python analysis suite generates:
-
-1. **Throughput Box Plots** - Performance distribution across data sizes
-2. **Cycles per Byte Plots** - Efficiency comparison 
-3. **Performance vs Size Charts** - Scaling behavior analysis
-4. **Performance Heatmaps** - Relative performance ratios
-5. **Summary Statistics** - Detailed statistical analysis
-
-### Output Files
-- `benchmark_plots/` - Generated visualizations (PNG/PDF)
-- `benchmark_results.json` - Raw benchmark data
-- `summary_statistics.csv` - Statistical summary
-
-## Performance Results (Example)
-
-Typical performance on modern x86_64 hardware:
-
-| Mode         | Throughput (MB/s) | Cycles/Byte | Description |
-|--------------|-------------------|-------------|-------------|
-| evp-soft     | ~4,525            | ~0.64       | OpenSSL software |
-| evp          | ~3,978            | ~0.73       | OpenSSL optimized |
-| aesni-atom   | ~3,537            | ~0.82       | Atom/Silvermont opt |
-| afalg        | ~1,886            | ~1.54       | Linux kernel |
-| aesni-native | ~953              | ~3.04       | Native AES-NI |
-| aesni        | ~848              | ~3.42       | Direct AES-NI |
-| soft         | ~78               | ~37.2       | Pure software |
-
-## Requirements
-
-### Build Dependencies
-- GCC with C99 support
-- OpenSSL development libraries (`libssl-dev`)
-- Linux kernel with AF_ALG support
-
-### Analysis Dependencies (Auto-installed)
-- Python 3.7+
-- matplotlib
-- seaborn  
-- pandas
-- numpy
-
-## Installation
-
-### Ubuntu/Debian
-```bash
-# Install build dependencies
-sudo apt update
-sudo apt install build-essential libssl-dev python3-full python3-venv
-
-# Clone and build
-git clone <repository>
-cd AES
-make deps  # Sets up Python environment
-make       # Builds the benchmark
-```
-
-## Contributing
-
-Feel free to submit issues, feature requests, or pull requests. Areas for improvement:
-
-- Additional cipher modes (GCM, CBC, etc.)
-- ARM NEON optimizations
-- Windows CryptoAPI support
-- GPU acceleration benchmarks
-
-## License
-
-This project is released under the MIT License. See LICENSE file for details.
-
-## Author
-
-Created by Eduardo Correia <ecorreia@apliant.com.br>
+For more detail, see the [main benchmark notes](docs/README.md) and the
+[Atom-focused implementation notes](docs/README_AESFINAL.md).

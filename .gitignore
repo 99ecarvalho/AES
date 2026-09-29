@@ -1,14 +1,39 @@
 # Build artifacts
 aes
+aes_fixed
+aesfinal
+aes-static
+aes-atom
+aes-generic
+aes-generic-static
+aes_cl1
+aes_cl2
+aes_ds
+aes_gem
+aes-atom-static
+aesni
+assembly/aes_pure_asm
+assembly/aes_inline_asm
+assembly/aes_toasm
+assembly/test_inline_asm
 *.o
 
 # Python virtual environment and analysis results
 venv/
+.venv/
 __pycache__/
 *.pyc
 *.pyo
 benchmark_results.json
 benchmark_plots/
+
+# Local secrets
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
 
 # IDE files
 .vscode-ctags
