@@ -1,0 +1,1514 @@
+[
+  {
+    "mode": "soft",
+    "size": 1024,
+    "iterations": 5,
+    "throughput_mbps": 106.37,
+    "cycles_per_byte": 25.703,
+    "elapsed_seconds": 4.6e-05,
+    "run": 1
+  },
+  {
+    "mode": "soft",
+    "size": 1024,
+    "iterations": 5,
+    "throughput_mbps": 107.99,
+    "cycles_per_byte": 25.286,
+    "elapsed_seconds": 4.5e-05,
+    "run": 2
+  },
+  {
+    "mode": "soft",
+    "size": 1024,
+    "iterations": 5,
+    "throughput_mbps": 104.28,
+    "cycles_per_byte": 26.227,
+    "elapsed_seconds": 4.7e-05,
+    "run": 3
+  },
+  {
+    "mode": "soft",
+    "size": 4096,
+    "iterations": 5,
+    "throughput_mbps": 109.91,
+    "cycles_per_byte": 25.205,
+    "elapsed_seconds": 0.000178,
+    "run": 1
+  },
+  {
+    "mode": "soft",
+    "size": 4096,
+    "iterations": 5,
+    "throughput_mbps": 111.31,
+    "cycles_per_byte": 24.893,
+    "elapsed_seconds": 0.000175,
+    "run": 2
+  },
+  {
+    "mode": "soft",
+    "size": 4096,
+    "iterations": 5,
+    "throughput_mbps": 111.29,
+    "cycles_per_byte": 24.892,
+    "elapsed_seconds": 0.000175,
+    "run": 3
+  },
+  {
+    "mode": "soft",
+    "size": 16384,
+    "iterations": 5,
+    "throughput_mbps": 105.8,
+    "cycles_per_byte": 26.262,
+    "elapsed_seconds": 0.000738,
+    "run": 1
+  },
+  {
+    "mode": "soft",
+    "size": 16384,
+    "iterations": 5,
+    "throughput_mbps": 107.32,
+    "cycles_per_byte": 25.903,
+    "elapsed_seconds": 0.000728,
+    "run": 2
+  },
+  {
+    "mode": "soft",
+    "size": 16384,
+    "iterations": 5,
+    "throughput_mbps": 109.74,
+    "cycles_per_byte": 25.328,
+    "elapsed_seconds": 0.000712,
+    "run": 3
+  },
+  {
+    "mode": "soft",
+    "size": 65536,
+    "iterations": 5,
+    "throughput_mbps": 104.18,
+    "cycles_per_byte": 26.699,
+    "elapsed_seconds": 0.003,
+    "run": 1
+  },
+  {
+    "mode": "soft",
+    "size": 65536,
+    "iterations": 5,
+    "throughput_mbps": 106.43,
+    "cycles_per_byte": 26.136,
+    "elapsed_seconds": 0.002936,
+    "run": 2
+  },
+  {
+    "mode": "soft",
+    "size": 65536,
+    "iterations": 5,
+    "throughput_mbps": 105.89,
+    "cycles_per_byte": 26.271,
+    "elapsed_seconds": 0.002951,
+    "run": 3
+  },
+  {
+    "mode": "soft",
+    "size": 262144,
+    "iterations": 5,
+    "throughput_mbps": 105.72,
+    "cycles_per_byte": 26.316,
+    "elapsed_seconds": 0.011824,
+    "run": 1
+  },
+  {
+    "mode": "soft",
+    "size": 262144,
+    "iterations": 5,
+    "throughput_mbps": 104.71,
+    "cycles_per_byte": 26.575,
+    "elapsed_seconds": 0.011938,
+    "run": 2
+  },
+  {
+    "mode": "soft",
+    "size": 262144,
+    "iterations": 5,
+    "throughput_mbps": 99.65,
+    "cycles_per_byte": 27.923,
+    "elapsed_seconds": 0.012544,
+    "run": 3
+  },
+  {
+    "mode": "soft",
+    "size": 1048576,
+    "iterations": 5,
+    "throughput_mbps": 109.31,
+    "cycles_per_byte": 25.46,
+    "elapsed_seconds": 0.045742,
+    "run": 1
+  },
+  {
+    "mode": "soft",
+    "size": 1048576,
+    "iterations": 5,
+    "throughput_mbps": 104.57,
+    "cycles_per_byte": 26.613,
+    "elapsed_seconds": 0.047815,
+    "run": 2
+  },
+  {
+    "mode": "soft",
+    "size": 1048576,
+    "iterations": 5,
+    "throughput_mbps": 111.74,
+    "cycles_per_byte": 24.905,
+    "elapsed_seconds": 0.044745,
+    "run": 3
+  },
+  {
+    "mode": "soft",
+    "size": 4194304,
+    "iterations": 5,
+    "throughput_mbps": 109.67,
+    "cycles_per_byte": 25.378,
+    "elapsed_seconds": 0.182373,
+    "run": 1
+  },
+  {
+    "mode": "soft",
+    "size": 4194304,
+    "iterations": 5,
+    "throughput_mbps": 107.2,
+    "cycles_per_byte": 25.962,
+    "elapsed_seconds": 0.186568,
+    "run": 2
+  },
+  {
+    "mode": "soft",
+    "size": 4194304,
+    "iterations": 5,
+    "throughput_mbps": 105.45,
+    "cycles_per_byte": 26.393,
+    "elapsed_seconds": 0.189668,
+    "run": 3
+  },
+  {
+    "mode": "soft",
+    "size": 16777216,
+    "iterations": 5,
+    "throughput_mbps": 109.41,
+    "cycles_per_byte": 25.438,
+    "elapsed_seconds": 0.7312,
+    "run": 1
+  },
+  {
+    "mode": "soft",
+    "size": 16777216,
+    "iterations": 5,
+    "throughput_mbps": 106.49,
+    "cycles_per_byte": 26.136,
+    "elapsed_seconds": 0.751256,
+    "run": 2
+  },
+  {
+    "mode": "soft",
+    "size": 16777216,
+    "iterations": 5,
+    "throughput_mbps": 108.05,
+    "cycles_per_byte": 25.759,
+    "elapsed_seconds": 0.74042,
+    "run": 3
+  },
+  {
+    "mode": "aesni",
+    "size": 1024,
+    "iterations": 5,
+    "throughput_mbps": 942.63,
+    "cycles_per_byte": 2.513,
+    "elapsed_seconds": 5e-06,
+    "run": 1
+  },
+  {
+    "mode": "aesni",
+    "size": 1024,
+    "iterations": 5,
+    "throughput_mbps": 962.32,
+    "cycles_per_byte": 2.446,
+    "elapsed_seconds": 5e-06,
+    "run": 2
+  },
+  {
+    "mode": "aesni",
+    "size": 1024,
+    "iterations": 5,
+    "throughput_mbps": 974.22,
+    "cycles_per_byte": 2.415,
+    "elapsed_seconds": 5e-06,
+    "run": 3
+  },
+  {
+    "mode": "aesni",
+    "size": 4096,
+    "iterations": 5,
+    "throughput_mbps": 1071.56,
+    "cycles_per_byte": 2.484,
+    "elapsed_seconds": 1.8e-05,
+    "run": 1
+  },
+  {
+    "mode": "aesni",
+    "size": 4096,
+    "iterations": 5,
+    "throughput_mbps": 1069.8,
+    "cycles_per_byte": 2.479,
+    "elapsed_seconds": 1.8e-05,
+    "run": 2
+  },
+  {
+    "mode": "aesni",
+    "size": 4096,
+    "iterations": 5,
+    "throughput_mbps": 1072.56,
+    "cycles_per_byte": 2.482,
+    "elapsed_seconds": 1.8e-05,
+    "run": 3
+  },
+  {
+    "mode": "aesni",
+    "size": 16384,
+    "iterations": 5,
+    "throughput_mbps": 1116.5,
+    "cycles_per_byte": 2.464,
+    "elapsed_seconds": 7e-05,
+    "run": 1
+  },
+  {
+    "mode": "aesni",
+    "size": 16384,
+    "iterations": 5,
+    "throughput_mbps": 1117.73,
+    "cycles_per_byte": 2.462,
+    "elapsed_seconds": 7e-05,
+    "run": 2
+  },
+  {
+    "mode": "aesni",
+    "size": 16384,
+    "iterations": 5,
+    "throughput_mbps": 1117.83,
+    "cycles_per_byte": 2.461,
+    "elapsed_seconds": 7e-05,
+    "run": 3
+  },
+  {
+    "mode": "aesni",
+    "size": 65536,
+    "iterations": 5,
+    "throughput_mbps": 1113.51,
+    "cycles_per_byte": 2.491,
+    "elapsed_seconds": 0.000281,
+    "run": 1
+  },
+  {
+    "mode": "aesni",
+    "size": 65536,
+    "iterations": 5,
+    "throughput_mbps": 1028.11,
+    "cycles_per_byte": 2.699,
+    "elapsed_seconds": 0.000304,
+    "run": 2
+  },
+  {
+    "mode": "aesni",
+    "size": 65536,
+    "iterations": 5,
+    "throughput_mbps": 1026.01,
+    "cycles_per_byte": 2.703,
+    "elapsed_seconds": 0.000305,
+    "run": 3
+  },
+  {
+    "mode": "aesni",
+    "size": 262144,
+    "iterations": 5,
+    "throughput_mbps": 1156.58,
+    "cycles_per_byte": 2.404,
+    "elapsed_seconds": 0.001081,
+    "run": 1
+  },
+  {
+    "mode": "aesni",
+    "size": 262144,
+    "iterations": 5,
+    "throughput_mbps": 1029.73,
+    "cycles_per_byte": 2.7,
+    "elapsed_seconds": 0.001214,
+    "run": 2
+  },
+  {
+    "mode": "aesni",
+    "size": 262144,
+    "iterations": 5,
+    "throughput_mbps": 1060.63,
+    "cycles_per_byte": 2.62,
+    "elapsed_seconds": 0.001179,
+    "run": 3
+  },
+  {
+    "mode": "aesni",
+    "size": 1048576,
+    "iterations": 5,
+    "throughput_mbps": 987.56,
+    "cycles_per_byte": 2.816,
+    "elapsed_seconds": 0.005063,
+    "run": 1
+  },
+  {
+    "mode": "aesni",
+    "size": 1048576,
+    "iterations": 5,
+    "throughput_mbps": 1047.48,
+    "cycles_per_byte": 2.655,
+    "elapsed_seconds": 0.004773,
+    "run": 2
+  },
+  {
+    "mode": "aesni",
+    "size": 1048576,
+    "iterations": 5,
+    "throughput_mbps": 929.57,
+    "cycles_per_byte": 2.993,
+    "elapsed_seconds": 0.005379,
+    "run": 3
+  },
+  {
+    "mode": "aesni",
+    "size": 4194304,
+    "iterations": 5,
+    "throughput_mbps": 1025.02,
+    "cycles_per_byte": 2.715,
+    "elapsed_seconds": 0.019512,
+    "run": 1
+  },
+  {
+    "mode": "aesni",
+    "size": 4194304,
+    "iterations": 5,
+    "throughput_mbps": 1094.72,
+    "cycles_per_byte": 2.541,
+    "elapsed_seconds": 0.01827,
+    "run": 2
+  },
+  {
+    "mode": "aesni",
+    "size": 4194304,
+    "iterations": 5,
+    "throughput_mbps": 1089.96,
+    "cycles_per_byte": 2.553,
+    "elapsed_seconds": 0.018349,
+    "run": 3
+  },
+  {
+    "mode": "aesni",
+    "size": 16777216,
+    "iterations": 5,
+    "throughput_mbps": 1092.44,
+    "cycles_per_byte": 2.548,
+    "elapsed_seconds": 0.073231,
+    "run": 1
+  },
+  {
+    "mode": "aesni",
+    "size": 16777216,
+    "iterations": 5,
+    "throughput_mbps": 1087.97,
+    "cycles_per_byte": 2.558,
+    "elapsed_seconds": 0.073532,
+    "run": 2
+  },
+  {
+    "mode": "aesni",
+    "size": 16777216,
+    "iterations": 5,
+    "throughput_mbps": 1061.43,
+    "cycles_per_byte": 2.622,
+    "elapsed_seconds": 0.07537,
+    "run": 3
+  },
+  {
+    "mode": "aesni-native",
+    "size": 1024,
+    "iterations": 5,
+    "throughput_mbps": 932.01,
+    "cycles_per_byte": 2.525,
+    "elapsed_seconds": 5e-06,
+    "run": 1
+  },
+  {
+    "mode": "aesni-native",
+    "size": 1024,
+    "iterations": 5,
+    "throughput_mbps": 932.37,
+    "cycles_per_byte": 2.534,
+    "elapsed_seconds": 5e-06,
+    "run": 2
+  },
+  {
+    "mode": "aesni-native",
+    "size": 1024,
+    "iterations": 5,
+    "throughput_mbps": 934.69,
+    "cycles_per_byte": 2.531,
+    "elapsed_seconds": 5e-06,
+    "run": 3
+  },
+  {
+    "mode": "aesni-native",
+    "size": 4096,
+    "iterations": 5,
+    "throughput_mbps": 1115.69,
+    "cycles_per_byte": 2.381,
+    "elapsed_seconds": 1.8e-05,
+    "run": 1
+  },
+  {
+    "mode": "aesni-native",
+    "size": 4096,
+    "iterations": 5,
+    "throughput_mbps": 1070.79,
+    "cycles_per_byte": 2.485,
+    "elapsed_seconds": 1.8e-05,
+    "run": 2
+  },
+  {
+    "mode": "aesni-native",
+    "size": 4096,
+    "iterations": 5,
+    "throughput_mbps": 1116.71,
+    "cycles_per_byte": 2.385,
+    "elapsed_seconds": 1.7e-05,
+    "run": 3
+  },
+  {
+    "mode": "aesni-native",
+    "size": 16384,
+    "iterations": 5,
+    "throughput_mbps": 1116.82,
+    "cycles_per_byte": 2.464,
+    "elapsed_seconds": 7e-05,
+    "run": 1
+  },
+  {
+    "mode": "aesni-native",
+    "size": 16384,
+    "iterations": 5,
+    "throughput_mbps": 1113.13,
+    "cycles_per_byte": 2.468,
+    "elapsed_seconds": 7e-05,
+    "run": 2
+  },
+  {
+    "mode": "aesni-native",
+    "size": 16384,
+    "iterations": 5,
+    "throughput_mbps": 1162.12,
+    "cycles_per_byte": 2.365,
+    "elapsed_seconds": 6.7e-05,
+    "run": 3
+  },
+  {
+    "mode": "aesni-native",
+    "size": 65536,
+    "iterations": 5,
+    "throughput_mbps": 1113.42,
+    "cycles_per_byte": 2.492,
+    "elapsed_seconds": 0.000281,
+    "run": 1
+  },
+  {
+    "mode": "aesni-native",
+    "size": 65536,
+    "iterations": 5,
+    "throughput_mbps": 1112.73,
+    "cycles_per_byte": 2.493,
+    "elapsed_seconds": 0.000281,
+    "run": 2
+  },
+  {
+    "mode": "aesni-native",
+    "size": 65536,
+    "iterations": 5,
+    "throughput_mbps": 1160.44,
+    "cycles_per_byte": 2.391,
+    "elapsed_seconds": 0.000269,
+    "run": 3
+  },
+  {
+    "mode": "aesni-native",
+    "size": 262144,
+    "iterations": 5,
+    "throughput_mbps": 1120.46,
+    "cycles_per_byte": 2.482,
+    "elapsed_seconds": 0.001116,
+    "run": 1
+  },
+  {
+    "mode": "aesni-native",
+    "size": 262144,
+    "iterations": 5,
+    "throughput_mbps": 1118.49,
+    "cycles_per_byte": 2.486,
+    "elapsed_seconds": 0.001118,
+    "run": 2
+  },
+  {
+    "mode": "aesni-native",
+    "size": 262144,
+    "iterations": 5,
+    "throughput_mbps": 1074.19,
+    "cycles_per_byte": 2.588,
+    "elapsed_seconds": 0.001164,
+    "run": 3
+  },
+  {
+    "mode": "aesni-native",
+    "size": 1048576,
+    "iterations": 5,
+    "throughput_mbps": 1116.12,
+    "cycles_per_byte": 2.493,
+    "elapsed_seconds": 0.00448,
+    "run": 1
+  },
+  {
+    "mode": "aesni-native",
+    "size": 1048576,
+    "iterations": 5,
+    "throughput_mbps": 1064.78,
+    "cycles_per_byte": 2.612,
+    "elapsed_seconds": 0.004696,
+    "run": 2
+  },
+  {
+    "mode": "aesni-native",
+    "size": 1048576,
+    "iterations": 5,
+    "throughput_mbps": 1091.68,
+    "cycles_per_byte": 2.549,
+    "elapsed_seconds": 0.00458,
+    "run": 3
+  },
+  {
+    "mode": "aesni-native",
+    "size": 4194304,
+    "iterations": 5,
+    "throughput_mbps": 1028.34,
+    "cycles_per_byte": 2.706,
+    "elapsed_seconds": 0.019449,
+    "run": 1
+  },
+  {
+    "mode": "aesni-native",
+    "size": 4194304,
+    "iterations": 5,
+    "throughput_mbps": 1042.4,
+    "cycles_per_byte": 2.67,
+    "elapsed_seconds": 0.019186,
+    "run": 2
+  },
+  {
+    "mode": "aesni-native",
+    "size": 4194304,
+    "iterations": 5,
+    "throughput_mbps": 1047.77,
+    "cycles_per_byte": 2.656,
+    "elapsed_seconds": 0.019088,
+    "run": 3
+  },
+  {
+    "mode": "aesni-native",
+    "size": 16777216,
+    "iterations": 5,
+    "throughput_mbps": 1102.28,
+    "cycles_per_byte": 2.525,
+    "elapsed_seconds": 0.072577,
+    "run": 1
+  },
+  {
+    "mode": "aesni-native",
+    "size": 16777216,
+    "iterations": 5,
+    "throughput_mbps": 1095.0,
+    "cycles_per_byte": 2.542,
+    "elapsed_seconds": 0.07306,
+    "run": 2
+  },
+  {
+    "mode": "aesni-native",
+    "size": 16777216,
+    "iterations": 5,
+    "throughput_mbps": 1037.93,
+    "cycles_per_byte": 2.681,
+    "elapsed_seconds": 0.077076,
+    "run": 3
+  },
+  {
+    "mode": "aesni-atom",
+    "size": 1024,
+    "iterations": 5,
+    "throughput_mbps": 3104.14,
+    "cycles_per_byte": 0.456,
+    "elapsed_seconds": 2e-06,
+    "run": 1
+  },
+  {
+    "mode": "aesni-atom",
+    "size": 1024,
+    "iterations": 5,
+    "throughput_mbps": 3030.92,
+    "cycles_per_byte": 0.448,
+    "elapsed_seconds": 2e-06,
+    "run": 2
+  },
+  {
+    "mode": "aesni-atom",
+    "size": 1024,
+    "iterations": 5,
+    "throughput_mbps": 3122.0,
+    "cycles_per_byte": 0.445,
+    "elapsed_seconds": 2e-06,
+    "run": 3
+  },
+  {
+    "mode": "aesni-atom",
+    "size": 4096,
+    "iterations": 5,
+    "throughput_mbps": 6347.5,
+    "cycles_per_byte": 0.327,
+    "elapsed_seconds": 3e-06,
+    "run": 1
+  },
+  {
+    "mode": "aesni-atom",
+    "size": 4096,
+    "iterations": 5,
+    "throughput_mbps": 6172.96,
+    "cycles_per_byte": 0.329,
+    "elapsed_seconds": 3e-06,
+    "run": 2
+  },
+  {
+    "mode": "aesni-atom",
+    "size": 4096,
+    "iterations": 5,
+    "throughput_mbps": 5780.19,
+    "cycles_per_byte": 0.333,
+    "elapsed_seconds": 3e-06,
+    "run": 3
+  },
+  {
+    "mode": "aesni-atom",
+    "size": 16384,
+    "iterations": 5,
+    "throughput_mbps": 8386.11,
+    "cycles_per_byte": 0.303,
+    "elapsed_seconds": 9e-06,
+    "run": 1
+  },
+  {
+    "mode": "aesni-atom",
+    "size": 16384,
+    "iterations": 5,
+    "throughput_mbps": 7995.6,
+    "cycles_per_byte": 0.316,
+    "elapsed_seconds": 1e-05,
+    "run": 2
+  },
+  {
+    "mode": "aesni-atom",
+    "size": 16384,
+    "iterations": 5,
+    "throughput_mbps": 7514.19,
+    "cycles_per_byte": 0.337,
+    "elapsed_seconds": 1e-05,
+    "run": 3
+  },
+  {
+    "mode": "aesni-atom",
+    "size": 65536,
+    "iterations": 5,
+    "throughput_mbps": 7169.4,
+    "cycles_per_byte": 0.379,
+    "elapsed_seconds": 4.4e-05,
+    "run": 1
+  },
+  {
+    "mode": "aesni-atom",
+    "size": 65536,
+    "iterations": 5,
+    "throughput_mbps": 7018.06,
+    "cycles_per_byte": 0.387,
+    "elapsed_seconds": 4.5e-05,
+    "run": 2
+  },
+  {
+    "mode": "aesni-atom",
+    "size": 65536,
+    "iterations": 5,
+    "throughput_mbps": 6757.05,
+    "cycles_per_byte": 0.401,
+    "elapsed_seconds": 4.6e-05,
+    "run": 3
+  },
+  {
+    "mode": "aesni-atom",
+    "size": 262144,
+    "iterations": 5,
+    "throughput_mbps": 6917.5,
+    "cycles_per_byte": 0.397,
+    "elapsed_seconds": 0.000181,
+    "run": 1
+  },
+  {
+    "mode": "aesni-atom",
+    "size": 262144,
+    "iterations": 5,
+    "throughput_mbps": 7122.06,
+    "cycles_per_byte": 0.388,
+    "elapsed_seconds": 0.000176,
+    "run": 2
+  },
+  {
+    "mode": "aesni-atom",
+    "size": 262144,
+    "iterations": 5,
+    "throughput_mbps": 6271.45,
+    "cycles_per_byte": 0.441,
+    "elapsed_seconds": 0.000199,
+    "run": 3
+  },
+  {
+    "mode": "aesni-atom",
+    "size": 1048576,
+    "iterations": 5,
+    "throughput_mbps": 5158.16,
+    "cycles_per_byte": 0.538,
+    "elapsed_seconds": 0.000969,
+    "run": 1
+  },
+  {
+    "mode": "aesni-atom",
+    "size": 1048576,
+    "iterations": 5,
+    "throughput_mbps": 5545.35,
+    "cycles_per_byte": 0.5,
+    "elapsed_seconds": 0.000902,
+    "run": 2
+  },
+  {
+    "mode": "aesni-atom",
+    "size": 1048576,
+    "iterations": 5,
+    "throughput_mbps": 7366.89,
+    "cycles_per_byte": 0.376,
+    "elapsed_seconds": 0.000679,
+    "run": 3
+  },
+  {
+    "mode": "aesni-atom",
+    "size": 4194304,
+    "iterations": 5,
+    "throughput_mbps": 4372.76,
+    "cycles_per_byte": 0.635,
+    "elapsed_seconds": 0.004574,
+    "run": 1
+  },
+  {
+    "mode": "aesni-atom",
+    "size": 4194304,
+    "iterations": 5,
+    "throughput_mbps": 6510.79,
+    "cycles_per_byte": 0.427,
+    "elapsed_seconds": 0.003072,
+    "run": 2
+  },
+  {
+    "mode": "aesni-atom",
+    "size": 4194304,
+    "iterations": 5,
+    "throughput_mbps": 6814.93,
+    "cycles_per_byte": 0.408,
+    "elapsed_seconds": 0.002935,
+    "run": 3
+  },
+  {
+    "mode": "aesni-atom",
+    "size": 16777216,
+    "iterations": 5,
+    "throughput_mbps": 6241.23,
+    "cycles_per_byte": 0.446,
+    "elapsed_seconds": 0.012818,
+    "run": 1
+  },
+  {
+    "mode": "aesni-atom",
+    "size": 16777216,
+    "iterations": 5,
+    "throughput_mbps": 6648.93,
+    "cycles_per_byte": 0.418,
+    "elapsed_seconds": 0.012032,
+    "run": 2
+  },
+  {
+    "mode": "aesni-atom",
+    "size": 16777216,
+    "iterations": 5,
+    "throughput_mbps": 6538.11,
+    "cycles_per_byte": 0.426,
+    "elapsed_seconds": 0.012236,
+    "run": 3
+  },
+  {
+    "mode": "evp",
+    "size": 1024,
+    "iterations": 5,
+    "throughput_mbps": 1011.98,
+    "cycles_per_byte": 2.097,
+    "elapsed_seconds": 5e-06,
+    "run": 1
+  },
+  {
+    "mode": "evp",
+    "size": 1024,
+    "iterations": 5,
+    "throughput_mbps": 1126.37,
+    "cycles_per_byte": 1.861,
+    "elapsed_seconds": 4e-06,
+    "run": 2
+  },
+  {
+    "mode": "evp",
+    "size": 1024,
+    "iterations": 5,
+    "throughput_mbps": 1115.31,
+    "cycles_per_byte": 1.889,
+    "elapsed_seconds": 4e-06,
+    "run": 3
+  },
+  {
+    "mode": "evp",
+    "size": 4096,
+    "iterations": 5,
+    "throughput_mbps": 3204.47,
+    "cycles_per_byte": 0.719,
+    "elapsed_seconds": 6e-06,
+    "run": 1
+  },
+  {
+    "mode": "evp",
+    "size": 4096,
+    "iterations": 5,
+    "throughput_mbps": 2838.43,
+    "cycles_per_byte": 0.758,
+    "elapsed_seconds": 7e-06,
+    "run": 2
+  },
+  {
+    "mode": "evp",
+    "size": 4096,
+    "iterations": 5,
+    "throughput_mbps": 2928.22,
+    "cycles_per_byte": 0.765,
+    "elapsed_seconds": 7e-06,
+    "run": 3
+  },
+  {
+    "mode": "evp",
+    "size": 16384,
+    "iterations": 5,
+    "throughput_mbps": 5908.71,
+    "cycles_per_byte": 0.428,
+    "elapsed_seconds": 1.3e-05,
+    "run": 1
+  },
+  {
+    "mode": "evp",
+    "size": 16384,
+    "iterations": 5,
+    "throughput_mbps": 5927.09,
+    "cycles_per_byte": 0.42,
+    "elapsed_seconds": 1.3e-05,
+    "run": 2
+  },
+  {
+    "mode": "evp",
+    "size": 16384,
+    "iterations": 5,
+    "throughput_mbps": 5903.35,
+    "cycles_per_byte": 0.431,
+    "elapsed_seconds": 1.3e-05,
+    "run": 3
+  },
+  {
+    "mode": "evp",
+    "size": 65536,
+    "iterations": 5,
+    "throughput_mbps": 7151.68,
+    "cycles_per_byte": 0.377,
+    "elapsed_seconds": 4.4e-05,
+    "run": 1
+  },
+  {
+    "mode": "evp",
+    "size": 65536,
+    "iterations": 5,
+    "throughput_mbps": 6645.54,
+    "cycles_per_byte": 0.408,
+    "elapsed_seconds": 4.7e-05,
+    "run": 2
+  },
+  {
+    "mode": "evp",
+    "size": 65536,
+    "iterations": 5,
+    "throughput_mbps": 6910.66,
+    "cycles_per_byte": 0.389,
+    "elapsed_seconds": 4.5e-05,
+    "run": 3
+  },
+  {
+    "mode": "evp",
+    "size": 262144,
+    "iterations": 5,
+    "throughput_mbps": 6610.54,
+    "cycles_per_byte": 0.418,
+    "elapsed_seconds": 0.000189,
+    "run": 1
+  },
+  {
+    "mode": "evp",
+    "size": 262144,
+    "iterations": 5,
+    "throughput_mbps": 7807.91,
+    "cycles_per_byte": 0.354,
+    "elapsed_seconds": 0.00016,
+    "run": 2
+  },
+  {
+    "mode": "evp",
+    "size": 262144,
+    "iterations": 5,
+    "throughput_mbps": 6820.13,
+    "cycles_per_byte": 0.405,
+    "elapsed_seconds": 0.000183,
+    "run": 3
+  },
+  {
+    "mode": "evp",
+    "size": 1048576,
+    "iterations": 5,
+    "throughput_mbps": 5922.31,
+    "cycles_per_byte": 0.468,
+    "elapsed_seconds": 0.000844,
+    "run": 1
+  },
+  {
+    "mode": "evp",
+    "size": 1048576,
+    "iterations": 5,
+    "throughput_mbps": 6038.87,
+    "cycles_per_byte": 0.46,
+    "elapsed_seconds": 0.000828,
+    "run": 2
+  },
+  {
+    "mode": "evp",
+    "size": 1048576,
+    "iterations": 5,
+    "throughput_mbps": 6332.18,
+    "cycles_per_byte": 0.438,
+    "elapsed_seconds": 0.00079,
+    "run": 3
+  },
+  {
+    "mode": "evp",
+    "size": 4194304,
+    "iterations": 5,
+    "throughput_mbps": 6683.55,
+    "cycles_per_byte": 0.416,
+    "elapsed_seconds": 0.002992,
+    "run": 1
+  },
+  {
+    "mode": "evp",
+    "size": 4194304,
+    "iterations": 5,
+    "throughput_mbps": 6401.4,
+    "cycles_per_byte": 0.434,
+    "elapsed_seconds": 0.003124,
+    "run": 2
+  },
+  {
+    "mode": "evp",
+    "size": 4194304,
+    "iterations": 5,
+    "throughput_mbps": 6803.78,
+    "cycles_per_byte": 0.409,
+    "elapsed_seconds": 0.00294,
+    "run": 3
+  },
+  {
+    "mode": "evp",
+    "size": 16777216,
+    "iterations": 5,
+    "throughput_mbps": 5622.14,
+    "cycles_per_byte": 0.495,
+    "elapsed_seconds": 0.014229,
+    "run": 1
+  },
+  {
+    "mode": "evp",
+    "size": 16777216,
+    "iterations": 5,
+    "throughput_mbps": 5888.93,
+    "cycles_per_byte": 0.472,
+    "elapsed_seconds": 0.013585,
+    "run": 2
+  },
+  {
+    "mode": "evp",
+    "size": 16777216,
+    "iterations": 5,
+    "throughput_mbps": 6654.61,
+    "cycles_per_byte": 0.418,
+    "elapsed_seconds": 0.012022,
+    "run": 3
+  },
+  {
+    "mode": "evp-soft",
+    "size": 1024,
+    "iterations": 5,
+    "throughput_mbps": 1064.26,
+    "cycles_per_byte": 1.875,
+    "elapsed_seconds": 5e-06,
+    "run": 1
+  },
+  {
+    "mode": "evp-soft",
+    "size": 1024,
+    "iterations": 5,
+    "throughput_mbps": 1108.97,
+    "cycles_per_byte": 1.879,
+    "elapsed_seconds": 4e-06,
+    "run": 2
+  },
+  {
+    "mode": "evp-soft",
+    "size": 1024,
+    "iterations": 5,
+    "throughput_mbps": 1135.01,
+    "cycles_per_byte": 1.873,
+    "elapsed_seconds": 4e-06,
+    "run": 3
+  },
+  {
+    "mode": "evp-soft",
+    "size": 4096,
+    "iterations": 5,
+    "throughput_mbps": 3006.66,
+    "cycles_per_byte": 0.758,
+    "elapsed_seconds": 6e-06,
+    "run": 1
+  },
+  {
+    "mode": "evp-soft",
+    "size": 4096,
+    "iterations": 5,
+    "throughput_mbps": 3021.08,
+    "cycles_per_byte": 0.75,
+    "elapsed_seconds": 6e-06,
+    "run": 2
+  },
+  {
+    "mode": "evp-soft",
+    "size": 4096,
+    "iterations": 5,
+    "throughput_mbps": 3266.1,
+    "cycles_per_byte": 0.717,
+    "elapsed_seconds": 6e-06,
+    "run": 3
+  },
+  {
+    "mode": "evp-soft",
+    "size": 16384,
+    "iterations": 5,
+    "throughput_mbps": 5974.23,
+    "cycles_per_byte": 0.429,
+    "elapsed_seconds": 1.3e-05,
+    "run": 1
+  },
+  {
+    "mode": "evp-soft",
+    "size": 16384,
+    "iterations": 5,
+    "throughput_mbps": 6223.12,
+    "cycles_per_byte": 0.408,
+    "elapsed_seconds": 1.3e-05,
+    "run": 2
+  },
+  {
+    "mode": "evp-soft",
+    "size": 16384,
+    "iterations": 5,
+    "throughput_mbps": 6008.23,
+    "cycles_per_byte": 0.416,
+    "elapsed_seconds": 1.3e-05,
+    "run": 3
+  },
+  {
+    "mode": "evp-soft",
+    "size": 65536,
+    "iterations": 5,
+    "throughput_mbps": 6863.46,
+    "cycles_per_byte": 0.395,
+    "elapsed_seconds": 4.6e-05,
+    "run": 1
+  },
+  {
+    "mode": "evp-soft",
+    "size": 65536,
+    "iterations": 5,
+    "throughput_mbps": 6691.22,
+    "cycles_per_byte": 0.404,
+    "elapsed_seconds": 4.7e-05,
+    "run": 2
+  },
+  {
+    "mode": "evp-soft",
+    "size": 65536,
+    "iterations": 5,
+    "throughput_mbps": 6625.68,
+    "cycles_per_byte": 0.407,
+    "elapsed_seconds": 4.7e-05,
+    "run": 3
+  },
+  {
+    "mode": "evp-soft",
+    "size": 262144,
+    "iterations": 5,
+    "throughput_mbps": 7905.99,
+    "cycles_per_byte": 0.348,
+    "elapsed_seconds": 0.000158,
+    "run": 1
+  },
+  {
+    "mode": "evp-soft",
+    "size": 262144,
+    "iterations": 5,
+    "throughput_mbps": 7778.52,
+    "cycles_per_byte": 0.355,
+    "elapsed_seconds": 0.000161,
+    "run": 2
+  },
+  {
+    "mode": "evp-soft",
+    "size": 262144,
+    "iterations": 5,
+    "throughput_mbps": 7088.26,
+    "cycles_per_byte": 0.386,
+    "elapsed_seconds": 0.000176,
+    "run": 3
+  },
+  {
+    "mode": "evp-soft",
+    "size": 1048576,
+    "iterations": 5,
+    "throughput_mbps": 6568.35,
+    "cycles_per_byte": 0.423,
+    "elapsed_seconds": 0.000761,
+    "run": 1
+  },
+  {
+    "mode": "evp-soft",
+    "size": 1048576,
+    "iterations": 5,
+    "throughput_mbps": 7059.07,
+    "cycles_per_byte": 0.393,
+    "elapsed_seconds": 0.000708,
+    "run": 2
+  },
+  {
+    "mode": "evp-soft",
+    "size": 1048576,
+    "iterations": 5,
+    "throughput_mbps": 7389.91,
+    "cycles_per_byte": 0.376,
+    "elapsed_seconds": 0.000677,
+    "run": 3
+  },
+  {
+    "mode": "evp-soft",
+    "size": 4194304,
+    "iterations": 5,
+    "throughput_mbps": 6445.33,
+    "cycles_per_byte": 0.431,
+    "elapsed_seconds": 0.003103,
+    "run": 1
+  },
+  {
+    "mode": "evp-soft",
+    "size": 4194304,
+    "iterations": 5,
+    "throughput_mbps": 6707.21,
+    "cycles_per_byte": 0.414,
+    "elapsed_seconds": 0.002982,
+    "run": 2
+  },
+  {
+    "mode": "evp-soft",
+    "size": 4194304,
+    "iterations": 5,
+    "throughput_mbps": 6725.84,
+    "cycles_per_byte": 0.413,
+    "elapsed_seconds": 0.002974,
+    "run": 3
+  },
+  {
+    "mode": "evp-soft",
+    "size": 16777216,
+    "iterations": 5,
+    "throughput_mbps": 6740.28,
+    "cycles_per_byte": 0.413,
+    "elapsed_seconds": 0.011869,
+    "run": 1
+  },
+  {
+    "mode": "evp-soft",
+    "size": 16777216,
+    "iterations": 5,
+    "throughput_mbps": 5625.63,
+    "cycles_per_byte": 0.495,
+    "elapsed_seconds": 0.014221,
+    "run": 2
+  },
+  {
+    "mode": "evp-soft",
+    "size": 16777216,
+    "iterations": 5,
+    "throughput_mbps": 6096.83,
+    "cycles_per_byte": 0.456,
+    "elapsed_seconds": 0.013122,
+    "run": 3
+  },
+  {
+    "mode": "afalg",
+    "size": 1024,
+    "iterations": 5,
+    "throughput_mbps": 201.41,
+    "cycles_per_byte": 13.255,
+    "elapsed_seconds": 2.4e-05,
+    "run": 1
+  },
+  {
+    "mode": "afalg",
+    "size": 1024,
+    "iterations": 5,
+    "throughput_mbps": 542.17,
+    "cycles_per_byte": 4.618,
+    "elapsed_seconds": 9e-06,
+    "run": 2
+  },
+  {
+    "mode": "afalg",
+    "size": 1024,
+    "iterations": 5,
+    "throughput_mbps": 524.58,
+    "cycles_per_byte": 4.737,
+    "elapsed_seconds": 9e-06,
+    "run": 3
+  },
+  {
+    "mode": "afalg",
+    "size": 4096,
+    "iterations": 5,
+    "throughput_mbps": 1757.51,
+    "cycles_per_byte": 1.449,
+    "elapsed_seconds": 1.1e-05,
+    "run": 1
+  },
+  {
+    "mode": "afalg",
+    "size": 4096,
+    "iterations": 5,
+    "throughput_mbps": 1611.49,
+    "cycles_per_byte": 1.592,
+    "elapsed_seconds": 1.2e-05,
+    "run": 2
+  },
+  {
+    "mode": "afalg",
+    "size": 4096,
+    "iterations": 5,
+    "throughput_mbps": 1813.15,
+    "cycles_per_byte": 1.411,
+    "elapsed_seconds": 1.1e-05,
+    "run": 3
+  },
+  {
+    "mode": "afalg",
+    "size": 16384,
+    "iterations": 5,
+    "throughput_mbps": 2994.9,
+    "cycles_per_byte": 0.894,
+    "elapsed_seconds": 2.6e-05,
+    "run": 1
+  },
+  {
+    "mode": "afalg",
+    "size": 16384,
+    "iterations": 5,
+    "throughput_mbps": 3040.59,
+    "cycles_per_byte": 0.884,
+    "elapsed_seconds": 2.6e-05,
+    "run": 2
+  },
+  {
+    "mode": "afalg",
+    "size": 16384,
+    "iterations": 5,
+    "throughput_mbps": 2905.14,
+    "cycles_per_byte": 0.925,
+    "elapsed_seconds": 2.7e-05,
+    "run": 3
+  },
+  {
+    "mode": "afalg",
+    "size": 65536,
+    "iterations": 5,
+    "throughput_mbps": 3662.6,
+    "cycles_per_byte": 0.751,
+    "elapsed_seconds": 8.5e-05,
+    "run": 1
+  },
+  {
+    "mode": "afalg",
+    "size": 65536,
+    "iterations": 5,
+    "throughput_mbps": 3557.6,
+    "cycles_per_byte": 0.774,
+    "elapsed_seconds": 8.8e-05,
+    "run": 2
+  },
+  {
+    "mode": "afalg",
+    "size": 65536,
+    "iterations": 5,
+    "throughput_mbps": 2181.71,
+    "cycles_per_byte": 1.266,
+    "elapsed_seconds": 0.000143,
+    "run": 3
+  },
+  {
+    "mode": "afalg",
+    "size": 262144,
+    "iterations": 5,
+    "throughput_mbps": 3560.83,
+    "cycles_per_byte": 0.778,
+    "elapsed_seconds": 0.000351,
+    "run": 1
+  },
+  {
+    "mode": "afalg",
+    "size": 262144,
+    "iterations": 5,
+    "throughput_mbps": 3454.45,
+    "cycles_per_byte": 0.803,
+    "elapsed_seconds": 0.000362,
+    "run": 2
+  },
+  {
+    "mode": "afalg",
+    "size": 262144,
+    "iterations": 5,
+    "throughput_mbps": 3730.71,
+    "cycles_per_byte": 0.743,
+    "elapsed_seconds": 0.000335,
+    "run": 3
+  },
+  {
+    "mode": "afalg",
+    "size": 1048576,
+    "iterations": 5,
+    "throughput_mbps": 3316.55,
+    "cycles_per_byte": 0.838,
+    "elapsed_seconds": 0.001508,
+    "run": 1
+  },
+  {
+    "mode": "afalg",
+    "size": 1048576,
+    "iterations": 5,
+    "throughput_mbps": 3350.38,
+    "cycles_per_byte": 0.825,
+    "elapsed_seconds": 0.001492,
+    "run": 2
+  },
+  {
+    "mode": "afalg",
+    "size": 1048576,
+    "iterations": 5,
+    "throughput_mbps": 2853.5,
+    "cycles_per_byte": 0.973,
+    "elapsed_seconds": 0.001752,
+    "run": 3
+  },
+  {
+    "mode": "afalg",
+    "size": 4194304,
+    "iterations": 5,
+    "throughput_mbps": 3097.99,
+    "cycles_per_byte": 0.898,
+    "elapsed_seconds": 0.006456,
+    "run": 1
+  },
+  {
+    "mode": "afalg",
+    "size": 4194304,
+    "iterations": 5,
+    "throughput_mbps": 3387.86,
+    "cycles_per_byte": 0.821,
+    "elapsed_seconds": 0.005903,
+    "run": 2
+  },
+  {
+    "mode": "afalg",
+    "size": 4194304,
+    "iterations": 5,
+    "throughput_mbps": 3381.96,
+    "cycles_per_byte": 0.823,
+    "elapsed_seconds": 0.005914,
+    "run": 3
+  },
+  {
+    "mode": "afalg",
+    "size": 16777216,
+    "iterations": 5,
+    "throughput_mbps": 2976.17,
+    "cycles_per_byte": 0.935,
+    "elapsed_seconds": 0.02688,
+    "run": 1
+  },
+  {
+    "mode": "afalg",
+    "size": 16777216,
+    "iterations": 5,
+    "throughput_mbps": 2893.14,
+    "cycles_per_byte": 0.962,
+    "elapsed_seconds": 0.027652,
+    "run": 2
+  },
+  {
+    "mode": "afalg",
+    "size": 16777216,
+    "iterations": 5,
+    "throughput_mbps": 2856.54,
+    "cycles_per_byte": 0.974,
+    "elapsed_seconds": 0.028006,
+    "run": 3
+  }
+]

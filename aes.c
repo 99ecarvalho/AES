@@ -489,8 +489,6 @@ static void aes256_ctr_crypt_aesni_atom_precomputed(uint8_t *buf, size_t len, co
 static void aes256_ctr_crypt_aesni_atom(uint8_t *buf, size_t len, const uint8_t key[32], uint8_t iv_counter[16]) {
     __m128i round_keys[15];
     aes256_key_expansion_atom(key, round_keys);
-    aes256_ctr_crypt_aesni_atom_precomputed(buf, len, round_keys, iv_counter);
-}
     
     /* Load counter once - optimized for Atom */
     uint64_t ctr_low, ctr_high;

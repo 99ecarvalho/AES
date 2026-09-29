@@ -1,0 +1,79 @@
+# Makefile for AES assembly implementations optimized for Atom E3845
+# Usage:
+#   make all          - Build all versions
+#   make pure_asm     - Build pure assembly version  
+#   make inline_asm   - Build inline assembly version
+#   make test         - Test both versions
+#   make clean        - Clean build artifacts
+
+CC = gcc
+CFLAGS = -O3 -march=silvermont -mtune=silvermont -maes -fomit-frame-pointer -funroll-loops
+LDFLAGS = -lrt -static
+
+# Targets
+.PHONY: all pure_asm inline_asm test clean
+
+all: pure_asm inline_asm
+
+# Pure assembly version (standalone executable)
+pure_asm: aes_pure_asm
+	@echo "Built pure assembly version: aes_pure_asm"
+
+aes_pure_asm: aes_atom_optimized.s
+	$(CC) $(CFLAGS) -o aes_pure_asm aes_atom_optimized.s $(LDFLAGS)
+
+# Inline assembly version (C with inline asm)
+inline_asm: aes_inline_asm
+	@echo "Built inline assembly version: aes_inline_asm"
+
+aes_inline_asm: test_inline_asm.c aes_inline_asm.h
+	$(CC) $(CFLAGS) -o aes_inline_asm test_inline_asm.c $(LDFLAGS)
+
+# Test both versions
+test: aes_pure_asm aes_inline_asm
+	@echo "Testing pure assembly version:"
+	@echo "=============================="
+	./aes_pure_asm
+	@echo ""
+	@echo "Testing inline assembly version:"
+	@echo "==============================="
+	./aes_inline_asm
+
+# Compare with original C implementation
+compare: aes_toasm aes_pure_asm aes_inline_asm
+	@echo "Comparing all implementations:"
+	@echo "============================="
+	@echo "Original C version:"
+	./aes_toasm
+	@echo ""
+	@echo "Pure assembly version:"
+	./aes_pure_asm  
+	@echo ""
+	@echo "Inline assembly version:"
+	./aes_inline_asm
+
+# Build original for comparison
+aes_toasm: aes_toasm.c
+	$(CC) $(CFLAGS) -o aes_toasm aes_toasm.c $(LDFLAGS)
+
+# Clean build artifacts
+clean:
+	rm -f aes_pure_asm aes_inline_asm aes_toasm
+	rm -f aes_toasm.s aes_toasm_readable.s
+	@echo "Cleaned build artifacts"
+
+# Help
+help:
+	@echo "Available targets:"
+	@echo "  all          - Build both assembly versions"
+	@echo "  pure_asm     - Build pure assembly version"
+	@echo "  inline_asm   - Build inline assembly version"
+	@echo "  test         - Test both assembly versions"
+	@echo "  compare      - Compare all implementations"
+	@echo "  clean        - Clean build artifacts"
+	@echo "  help         - Show this help"
+	@echo ""
+	@echo "Files created:"
+	@echo "  aes_atom_optimized.s - Pure assembly implementation"
+	@echo "  aes_inline_asm.h     - Inline assembly header for integration"
+	@echo "  test_inline_asm.c    - Example usage of inline assembly"

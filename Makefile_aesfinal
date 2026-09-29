@@ -1,0 +1,79 @@
+# Makefile for AES-256-CTR Reference Implementation (Atom E3845)
+# This is the optimized reference implementation for benchmarking
+
+CC = gcc
+CFLAGS = -std=c99 -O3 -march=silvermont -mtune=silvermont -maes -flto -fomit-frame-pointer -funroll-loops -Wall -Wextra
+LDFLAGS = -lrt -static
+TARGET = aesfinal
+SOURCE = aesfinal.c
+
+# Default target
+all: $(TARGET)
+
+# Build the reference implementation
+$(TARGET): $(SOURCE)
+	$(CC) $(CFLAGS) -o $(TARGET) $(SOURCE) $(LDFLAGS)
+	@echo ""
+	@echo "Build complete: $(TARGET)"
+	@echo "Optimizations: Silvermont/Atom E3845 with AES-NI"
+	@echo ""
+	@echo "Run with: ./$(TARGET)"
+	@echo "Options:  ./$(TARGET) --size 4194304 --iters 100"
+	@echo ""
+
+# Test the implementation
+test: $(TARGET)
+	@echo "Running reference benchmark..."
+	./$(TARGET) --size 1048576 --iters 10
+
+# Full benchmark
+benchmark: $(TARGET)
+	@echo "Running full benchmark (4MB, 100 iterations)..."
+	./$(TARGET) --size 4194304 --iters 100
+
+# Quick benchmark
+quick: $(TARGET)
+	@echo "Running quick benchmark..."
+	./$(TARGET) --size 1048576 --iters 10
+
+# Clean build artifacts
+clean:
+	rm -f $(TARGET)
+	@echo "Cleaned build artifacts"
+
+# Show build info
+info:
+	@echo "AES-256-CTR Reference Implementation"
+	@echo "===================================="
+	@echo "Target:      $(TARGET)"
+	@echo "Source:      $(SOURCE)"
+	@echo "Compiler:    $(CC)"
+	@echo "Flags:       $(CFLAGS)"
+	@echo "Linker:      $(LDFLAGS)"
+	@echo ""
+	@echo "Optimizations:"
+	@echo "  - Intel Atom E3845 (Silvermont)"
+	@echo "  - AES-NI hardware acceleration"
+	@echo "  - 2-way block parallelism"
+	@echo "  - Pre-computed key expansion"
+	@echo "  - Fully unrolled encryption rounds"
+	@echo "  - Static linking for portability"
+	@echo ""
+
+# Help
+help:
+	@echo "Available targets:"
+	@echo "  all        - Build the reference implementation (default)"
+	@echo "  test       - Build and run quick test (1MB, 10 iterations)"
+	@echo "  benchmark  - Build and run full benchmark (4MB, 100 iterations)"
+	@echo "  quick      - Build and run quick benchmark"
+	@echo "  clean      - Remove build artifacts"
+	@echo "  info       - Show build configuration"
+	@echo "  help       - Show this help"
+	@echo ""
+	@echo "Runtime options:"
+	@echo "  ./$(TARGET) --size N    - Set data size in bytes"
+	@echo "  ./$(TARGET) --iters N   - Set number of iterations"
+	@echo "  ./$(TARGET) --help      - Show runtime help"
+
+.PHONY: all test benchmark quick clean info help

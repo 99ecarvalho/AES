@@ -24,8 +24,6 @@ venv/
 __pycache__/
 *.pyc
 *.pyo
-benchmark_results.json
-benchmark_plots/
 
 # Local secrets
 .env
